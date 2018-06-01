@@ -338,11 +338,12 @@ function widget:Initialize()
 						 return;
 					 }
 
+					vec4 vert = gl_Vertex;
 					 if (gl_Vertex.w>0) {
 						 gl_FrontColor = gl_Color;
 						 if (gl_Vertex.z>0.0) {
-							 gl_Vertex.x -= (1.0-progress)*gl_Vertex.z;
-							 gl_Vertex.z  = 0.0;
+							 vert.x -= (1.0-progress)*gl_Vertex.z;
+							 vert.z  = 0.0;
 						 }
 					 }else{
 						 if (gl_Vertex.y>0.0) {
@@ -351,14 +352,14 @@ function widget:Initialize()
 							 gl_FrontColor = barColor;
 						 }
 						 if (gl_Vertex.z>1.0) {
-							 gl_Vertex.x += progress*gl_Vertex.z;
-							 gl_Vertex.z  = 0.0;
+							 vert.x += progress*gl_Vertex.z;
+							 vert.z  = 0.0;
 						 }
-						 gl_Vertex.w  = 1.0;
+						 vert.w  = 1.0;
 					 }
 
-					 gl_Vertex.y += offset;
-					 gl_Position  = gl_ModelViewProjectionMatrix*gl_Vertex;
+					 vert.y += offset;
+					 gl_Position  = gl_ModelViewProjectionMatrix*vert;
 				 }
 			]],
 		});
